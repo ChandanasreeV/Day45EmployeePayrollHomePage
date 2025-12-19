@@ -101,3 +101,19 @@ select{
     padding: 25px;
     border-radius: 10px;
 }
+
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-btn {
+    background: #2e8bc0;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+}
