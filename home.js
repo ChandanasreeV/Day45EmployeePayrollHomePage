@@ -3,32 +3,51 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function createInnerHTML() {
-    const headerHtml = `
-        <tr>
-            <th>Profile</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Department</th>
-            <th>Salary</th>
-            <th>Start Date</th>
-            <th>Actions</th>
-        </tr>
-    `;
 
-    const row = `
-        <tr>
-            <td><img class="table-profile" src="assets/pic1.jpg"></td>
-            <td>Mark Henry</td>
-            <td>Male</td>
-            <td><div class="dept-chip">HR</div></td>
-            <td>45000</td>
-            <td>04 Jan 2025</td>
-            <td>
-                <button class="btn-small">Edit</button>
-                <button class="btn-small delete">Delete</button>
-            </td>
-        </tr>
-    `;
+    const empList = [
+        {
+            _name: "Bruce Wayne",
+            _gender: "Male",
+            _department: ["Finance", "HR"],
+            _salary: "70000",
+            _startDate: "12 Jan 2025",
+            _profilePic: "assets/pic2.jpg"
+        },
+        {
+            _name: "Diana Prince",
+            _gender: "Female",
+            _department: ["Sales"],
+            _salary: "55000",
+            _startDate: "25 Jan 2025",
+            _profilePic: "assets/pic3.jpg"
+        }
+    ];
 
-    document.querySelector("#table-display").innerHTML = row;
+    let innerHTML = "";
+
+    for (let emp of empList) {
+
+        let deptHTML = "";
+        emp._department.forEach(dept => {
+            deptHTML += `<div class='dept-chip'>${dept}</div>`;
+        });
+
+        innerHTML += `
+            <tr>
+                <td><img class="table-profile" src="${emp._profilePic}"></td>
+                <td>${emp._name}</td>
+                <td>${emp._gender}</td>
+                <td>${deptHTML}</td>
+                <td>${emp._salary}</td>
+                <td>${emp._startDate}</td>
+                <td>
+                    <button class="btn-small">Edit</button>
+                    <button class="btn-small delete">Delete</button>
+                </td>
+            </tr>
+        `;
+    }
+
+    document.querySelector("#table-display").innerHTML = innerHTML;
 }
+
