@@ -1,31 +1,20 @@
 window.addEventListener("DOMContentLoaded", () => {
+    employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList")) || [];
+    document.getElementById("emp-count").textContent = "(" + employeePayrollList.length + ")";
     createInnerHTML();
 });
 
 function createInnerHTML() {
-
-    const empList = [
-        {
-            _name: "Bruce Wayne",
-            _gender: "Male",
-            _department: ["Finance", "HR"],
-            _salary: "70000",
-            _startDate: "12 Jan 2025",
-            _profilePic: "assets/pic2.jpg"
-        },
-        {
-            _name: "Diana Prince",
-            _gender: "Female",
-            _department: ["Sales"],
-            _salary: "55000",
-            _startDate: "25 Jan 2025",
-            _profilePic: "assets/pic3.jpg"
-        }
-    ];
-
     let innerHTML = "";
 
-    for (let emp of empList) {
+    for (let emp of employeePayrollList) {
+
+        const date = new Date(emp._startDate);
+        const formattedDate = date.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
 
         let deptHTML = "";
         emp._department.forEach(dept => {
@@ -34,12 +23,12 @@ function createInnerHTML() {
 
         innerHTML += `
             <tr>
-                <td><img class="table-profile" src="${emp._profilePic}"></td>
+                <td><img class="table-profile" src="assets/${emp._profilePic}"></td>
                 <td>${emp._name}</td>
                 <td>${emp._gender}</td>
                 <td>${deptHTML}</td>
                 <td>${emp._salary}</td>
-                <td>${emp._startDate}</td>
+                <td>${formattedDate}</td>
                 <td>
                     <button class="btn-small">Edit</button>
                     <button class="btn-small delete">Delete</button>
@@ -50,4 +39,3 @@ function createInnerHTML() {
 
     document.querySelector("#table-display").innerHTML = innerHTML;
 }
-
